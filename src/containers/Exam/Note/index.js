@@ -14,16 +14,12 @@ export default class NoteContainer extends React.PureComponent {
         addEventListener("scroll", this.checkScroll)
     }
 
-    async checkScroll() {
+    checkScroll = async () => {
         const notes = await getApi()
         const el = document.getElementsByClassName("noteclass")
         const lastEl = el[el.length - 1]
         const element = lastEl.getBoundingClientRect().right
-        if (window.scrollY + window.outerHeight - 350 > element / 2) {
-            this.setState({
-                notes
-            })
-        }
+        if (window.scrollY + window.outerHeight - 350 > element / 2) this.setState({notes})
     }
 
     async componentDidMount() {
