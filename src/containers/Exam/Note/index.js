@@ -3,9 +3,14 @@ import NoteComponent from "./component";
 import { getApi } from "./NoteApi";
 import "./index.scss"
 
+/**
+ * @class {NoteContainer}
+ * @return {React.Component}  
+ * container for drawing notes
+ */
 export default class NoteContainer extends React.PureComponent {
     state = {
-        notes: [],
+        notes: []
     }
 
 
@@ -15,11 +20,14 @@ export default class NoteContainer extends React.PureComponent {
     }
 
     checkScroll = async () => {
-        const notes = await getApi()
-        const el = document.getElementsByClassName("noteclass")
-        const lastEl = el[el.length - 1]
-        const element = lastEl.getBoundingClientRect().right
-        if (window.scrollY + window.outerHeight - 350 > element / 2) this.setState({notes})
+        if (window.scrollY + window.outerHeight - 30 > document.body.scrollHeight) {
+            const notes = await getApi()
+            const newStateNotes = this.state.notes
+            for (let i in notes) {
+                newStateNotes.push(notes[i])
+            }
+            this.setState({ newStateNotes })
+        }
     }
 
     async componentDidMount() {
@@ -40,7 +48,7 @@ export default class NoteContainer extends React.PureComponent {
                     {
                         notes.map(({ id, title, userId }, index) => (
                             <div
-                                key={id}
+                                key={index}
                             >
                                 <NoteComponent
                                     id={id}

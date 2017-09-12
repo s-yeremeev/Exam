@@ -1,6 +1,13 @@
 import React from "react"
 
-
+/**
+ * 
+ * @param {string} id 
+ * @param {string} title 
+ * @param {string} userId 
+ * @function {NoteComponent}
+ * @return {React.Component}  
+ */
 const NoteComponent = ({
     id,
     title,
@@ -9,7 +16,7 @@ const NoteComponent = ({
     return (
         <div className="noteclass">
             <li>
-                <a href="#">
+                <a htmlFor="#">
                     <h2>{title}</h2>
                     <p>{userId}</p>
                 </a>

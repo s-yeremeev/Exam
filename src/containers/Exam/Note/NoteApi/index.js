@@ -1,3 +1,7 @@
+/**
+ * @function {getApi}
+ * retrieving objects from a remote resource
+ */
 export const getApi = async () => { 
    try {  
         const response = await fetch("https://jsonplaceholder.typicode.com/todos", { method: 'GET' })
